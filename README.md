@@ -83,3 +83,18 @@ docs/
 * `src/` — Reusable Python code and functions.
 * `notebooks/` — Exploratory analysis, data preparation, and modeling notebooks.
 * `docs/` — Stakeholder-facing documents and project documentation.
+## Data Storage
+
+The project separates data into two main folders:
+
+- `data/raw/` stores raw or minimally modified data.
+- `data/processed/` stores processed data that is ready for later analysis.
+
+CSV is used for raw data because it is simple, readable, and widely compatible. Parquet is used for processed data because it is more storage-efficient and preserves data types more reliably.
+
+The storage paths are controlled through environment variables in the local `.env` file:
+
+- `DATA_DIR_RAW=data/raw`
+- `DATA_DIR_PROCESSED=data/processed`
+
+The notebook loads these variables using `python-dotenv`. The reusable `write_df()` and `read_df()` functions automatically select CSV or Parquet based on the file extension and create missing directories when necessary.
